@@ -92,7 +92,7 @@ class MultiHeadAttention(nn.Module):
 
         attn_scores = queries @ keys.transpose(2, 3)
 
-        mask_bool = self.mask()[:num_tokens, -torch.inf]  # type: ignore
+        mask_bool = self.mask.bool()[:num_tokens, :num_tokens]  # type: ignore
 
         attn_scores.masked_fill_(mask_bool, -torch.inf)
         attn_weights = torch.softmax(attn_scores / keys.shape[-1] ** 0.5, dim=-1)
@@ -146,6 +146,9 @@ class FeedForward(nn.Module):
             GELU(),
             nn.Linear(4 * cfg["emb_dim"], cfg["emb_dim"]),
         )
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        return self.layers(x)
 
 
 class TransformerBlock(nn.Module):
