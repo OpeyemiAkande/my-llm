@@ -247,10 +247,10 @@ def main():
     encoded = tokenizer.encode(start_context)
     encoded_tensor = torch.tensor(encoded).unsqueeze(0)
 
-    print(f"\nInput text:", start_context)
-    print("\nInput text:", start_context)
-    print("Encoded input text:", encoded)
-    print("encoded_tensor.shape:", encoded_tensor.shape)
+    # print(f"\nInput text:", start_context)
+    # print("\nInput text:", start_context)
+    # print("Encoded input text:", encoded)
+    # print("encoded_tensor.shape:", encoded_tensor.shape)
 
     out = generate_text_simple(
         model=model,
@@ -260,9 +260,9 @@ def main():
     )
     decoded_text = tokenizer.decode(out.squeeze(0).tolist())
 
-    print(f"\n\n{50*'='}\n{22*' '}OUT\n{50*'='}")
-    print("\nOutput: ", out)
-    print("Output length: ", len(out[0]))
+    # print(f"\n\n{50*'='}\n{22*' '}OUT\n{50*'='}")
+    # print("\nOutput: ", out)
+    # print("Output length: ", len(out[0]))
     print("Output text: ", decoded_text)
 
 
